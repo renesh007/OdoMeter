@@ -16,5 +16,277 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></LinearLayout>
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="129dp"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/etLog"
+            android:editable="false" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:text="Total"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Total" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnHunUp"
+                        android:background="@android:color/white" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnDeciUp"
+                        android:background="@android:color/white" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnDeciTensUp"
+                        android:background="@android:color/white" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right">
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvTotThou"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvTotHund"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvTotTen"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text=","
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView11"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvTotDeci"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvTotDeciTen"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnHunDown"
+                        android:background="@android:color/background_light" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnDeciDown"
+                        android:background="@android:color/background_light" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnDeciTensDown"
+                        android:background="@android:color/background_light" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:text="Split"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView15" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right">
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSplitThou"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSplitHund"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSplitTen"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text=","
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView18"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSplitDeci"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSplitDeciTen"
+                        android:gravity="center_horizontal"
+                        android:textSize="24sp"
+                        android:editable="false" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:text="Current Speed: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSpeed" />
+
+                    <TextView
+                        android:text="@string/_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvCurrentSpeed" />
+
+                    <Button
+                        android:text="Change Speed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnChangeSpeed" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:text="Start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnStart"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="Stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnStop"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="Split"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnSplit" />
+
+                <Button
+                    android:text="Reset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnReset" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

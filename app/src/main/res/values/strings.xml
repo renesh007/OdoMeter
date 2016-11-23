@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OdoMeter</string>
+    <string name="unitOfMeasure">Km</string>
+    <string name="_0">0</string>
+    <string name="speed_dialog_heading">Change speed</string>
+    <string name="speed_dialog_msg">Enter speed in Km/h</string>
 </resources>
