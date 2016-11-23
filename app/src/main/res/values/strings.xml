@@ -4,4 +4,6 @@
     <string name="_0">0</string>
     <string name="speed_dialog_heading">Change speed</string>
     <string name="speed_dialog_msg">Enter speed in Km/h</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>

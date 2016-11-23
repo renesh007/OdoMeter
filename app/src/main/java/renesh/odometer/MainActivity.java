@@ -1,5 +1,7 @@
 package renesh.odometer;
 
+import android.content.DialogInterface;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,13 +23,12 @@ public class MainActivity extends AppCompatActivity {
     Timer timer;
     int kph;
     int splitCounter;
-    AlertDialog.Builder  builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.speed_dialog_msg).setTitle(R.string.speed_dialog_heading);
+
         totalMeters = 0;
         splitMeters = 0;
         splitCounter= 1;
