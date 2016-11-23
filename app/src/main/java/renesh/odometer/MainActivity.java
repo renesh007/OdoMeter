@@ -2,6 +2,8 @@ package renesh.odometer;
 
 import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +15,7 @@ import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity implements changeSpeedDialogFragment.ChangeSpeedListener {
 
     Button start,stop,split,reset;
     TextView totDeciTen,totDeci,totTen,totHund,totThous;
@@ -23,12 +25,13 @@ public class MainActivity extends AppCompatActivity {
     Timer timer;
     int kph;
     int splitCounter;
+    DialogFragment df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        df = new changeSpeedDialogFragment();
         totalMeters = 0;
         splitMeters = 0;
         splitCounter= 1;
@@ -147,5 +150,21 @@ public class MainActivity extends AppCompatActivity {
         splitDeciTen.setText(((tempSplit/1000)%10));
 
 
+    }
+    public void showDialog(){
+        df.show(getSupportFragmentManager(),"changeSpeedDialogFragment");
+    }
+    public void hideDialog(){
+        df.dismiss();
+    }
+
+    @Override
+    public void onOkClicked(DialogFragment dialog) {
+        int speed  =Integer.parseInt(((EditText)(findViewById(R.id.editText))).getText().toString());
+    }
+
+    @Override
+    public void onCancelClicked(DialogFragment dialog) {
+        hideDialog();
     }
 }
