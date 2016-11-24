@@ -1,5 +1,6 @@
 package renesh.odometer;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -11,15 +12,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class MainActivity extends FragmentActivity implements changeSpeedDialogFragment.ChangeSpeedListener {
 
-    Button start,stop,split,reset;
+    Button start,stop,split,reset,chgSpeed;
     TextView totDeciTen,totDeci,totTen,totHund,totThous;
     TextView splitDeciTen,splitDeci,splitTen,splitHund,splitThous;
+    TextView currSpeed;
     EditText log;
     double totalMeters,splitMeters;
     Timer timer;
@@ -35,12 +40,12 @@ public class MainActivity extends FragmentActivity implements changeSpeedDialogF
         totalMeters = 0;
         splitMeters = 0;
         splitCounter= 1;
-        kph = 0;
-        timer = new Timer();
+        kph = 350;
         start =(Button) findViewById(R.id.btnStart);
         stop =(Button) findViewById(R.id.btnStop);
         split =(Button) findViewById(R.id.btnSplit);
         reset =(Button) findViewById(R.id.btnReset);
+        chgSpeed = (Button) findViewById(R.id.btnChangeSpeed);
 
         stop.setEnabled(false);
         start.setEnabled(true);
@@ -61,6 +66,14 @@ public class MainActivity extends FragmentActivity implements changeSpeedDialogF
         splitHund =(TextView) findViewById(R.id.tvSplitHund);
         splitThous =(TextView) findViewById(R.id.tvSplitThou);
 
+        currSpeed = (TextView) findViewById(R.id.tvCurrentSpeed);
+        updateCurrSpeed();
+        chgSpeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +102,7 @@ public class MainActivity extends FragmentActivity implements changeSpeedDialogF
     }
 
     public void start(){
+        timer = new Timer();
         TimerTask tt = new TimerTask() {
             @Override
             public void run() {
@@ -105,23 +119,23 @@ public class MainActivity extends FragmentActivity implements changeSpeedDialogF
     }
     public void stop(){
         timer.cancel();
-        timer.purge();
+        //timer.purge();
         stop.setEnabled(false);
         start.setEnabled(true);
         split.setEnabled(false);
-        reset.setEnabled(false);
+        reset.setEnabled(true);
 
     }
     public void resetUi(){
         totalMeters = 0;
         splitMeters = 0;
-        splitCounter = 0;
-        kph = 0;
+        splitCounter = 1;
         updateUi();
     }
     public void split(){
-        double kmLog = (int) ((splitMeters/10.0)/100.0);
-        log.append(splitCounter +". " + kmLog +" "+ getString(R.string.unitOfMeasure) + "\n");
+        double kmLog =(int) (splitMeters/10);
+        kmLog = kmLog/100;
+        log.append(splitCounter +": " + kmLog +" "+ getString(R.string.unitOfMeasure) + "\n");
         splitMeters = 0;
         splitCounter++;
     }
@@ -134,22 +148,34 @@ public class MainActivity extends FragmentActivity implements changeSpeedDialogF
     }
 
     public void updateUi(){
-        int tempTotal = (int) totalMeters;
-        int tempSplit = (int) splitMeters;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                int tempTotal = (int) totalMeters;
+                int tempSplit = (int) splitMeters;
+                totThous.setText(""+(tempTotal/100000));
+                totHund.setText(""+((tempTotal/10000)%10));
+                totTen.setText(""+((tempTotal/1000)%10));
+                totDeci.setText(""+((tempTotal/100)%10));
+                totDeciTen.setText(""+((tempTotal/10)%10));
 
-        totThous.setText((tempTotal/100000));
-        totHund.setText(((tempTotal/10000)%10));
-        totTen.setText(((tempTotal/1000)%10));
-        totDeci.setText(((tempTotal/100)%10));
-        totDeciTen.setText(((tempTotal/1000)%10));
-
-        splitThous.setText((tempSplit/100000));
-        splitHund.setText(((tempSplit/10000)%10));
-        splitTen.setText(((tempSplit/1000)%10));
-        splitDeci.setText(((tempSplit/100)%10));
-        splitDeciTen.setText(((tempSplit/1000)%10));
+                splitThous.setText(""+(tempSplit/100000));
+                splitHund.setText(""+((tempSplit/10000)%10));
+                splitTen.setText(""+((tempSplit/1000)%10));
+                splitDeci.setText(""+((tempSplit/100)%10));
+                splitDeciTen.setText(""+((tempSplit/10)%10));
+            }
+        });
 
 
+    }
+    public void updateCurrSpeed(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                currSpeed.setText(""+kph);
+            }
+        });
     }
     public void showDialog(){
         df.show(getSupportFragmentManager(),"changeSpeedDialogFragment");
@@ -160,7 +186,13 @@ public class MainActivity extends FragmentActivity implements changeSpeedDialogF
 
     @Override
     public void onOkClicked(DialogFragment dialog) {
-        int speed  =Integer.parseInt(((EditText)(findViewById(R.id.editText))).getText().toString());
+        kph  = Integer.parseInt(((EditText) dialog.getDialog().findViewById(R.id.editText)).getText().toString());
+        if(kph >=0){
+            updateCurrSpeed();
+        }
+        else{
+            Toast.makeText(this,"speed must be positive number",Toast.LENGTH_SHORT);
+        }
     }
 
     @Override
